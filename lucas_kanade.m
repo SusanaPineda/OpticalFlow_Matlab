@@ -12,10 +12,14 @@ Iy_f1 = conv2(f1, [-1 -2 -1; 0 0 0 ; 1 2 1]); %Derivada parcial en y con sobel
 Ix_f2 = conv2(f2,[-1 0 1; -2 0 2; -1 0 1]); %Derivada parcial en x con sobel
 Iy_f2 = conv2(f2, [-1 -2 -1; 0 0 0 ; 1 2 1]); %Derivada parcial en y con sobel
 
+
 Ix = Ix_f1 + Ix_f2;
 Iy = Iy_f1 + Iy_f2;
 
-It = conv2(f1, ones(2)) + conv2(f2, -ones(2)); 
+f1_f = imgaussfilt(f1);
+f2_f = imgaussfilt(f2);
+
+It = f1_f - f2_f; 
 
 %Recorremos la imagen con la ventana de integración
 centr = round(h/2);
@@ -28,11 +32,12 @@ for i = centr +1:img_size(1)-centr
         Iy_sum = Iy(i-centr:i+centr, j-centr:j+centr);
         It_sum = It(i-centr:i+centr, j-centr:j+centr);
         
-        %calculo de la pseudoinversa y producto matricial
+        
         Ix_sum = Ix_sum(:);
         Iy_sum = Iy_sum(:);
         It_sum = -It_sum(:);
         
+        %calculo de la pseudoinversa y producto matricial
         A = [Ix_sum Iy_sum];
         uv = pinv(A)*It_sum;
         

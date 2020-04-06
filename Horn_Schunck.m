@@ -4,7 +4,7 @@ function [ X_d, Y_d, u_d, v_d ] = Horn_Schunk( alpha, f1, f2, iteraciones,d)
 u = zeros(size(f1));
 v = zeros(size(f2));
 
-%Calculo de Ix, Iy It de las imagenes completasIx
+%Calculo de Ix, Iy It de las imagenes completas
 Ix_f1 = conv2(f1,[-1 0 1; -2 0 2; -1 0 1], 'same'); %Derivada parcial en x con sobel
 Iy_f1 = conv2(f1, [-1 -2 -1; 0 0 0 ; 1 2 1], 'same'); %Derivada parcial en y con sobel
 

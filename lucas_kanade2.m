@@ -17,7 +17,10 @@ Iy_f2 = conv2(f2, [-1 -2 -1; 0 0 0 ; 1 2 1]); %Derivada parcial en y con sobel
 Ix = Ix_f1 + Ix_f2;
 Iy = Iy_f1 + Iy_f2;
 
-It = conv2(f1, ones(2)) + conv2(f2, -ones(2)); 
+f1_f = imgaussfilt(f1);
+f2_f = imgaussfilt(f2);
+
+It = f1_f - f2_f; 
 
 %Recorremos la imagen con la ventana de integración
 centr = round(h/2);
